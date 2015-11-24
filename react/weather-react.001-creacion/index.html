@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="weather.css">
+  </head>
+
+  <body id="weather-background" class="default-weather">
+    <div class="page-wrap">
+      <header class="search-bar">
+        <p class="search-text">
+          <span class="search-location-text">What's the weather like in
+            <input id="search-location-input" class="search-location-input"
+                   type="text" placeholder="City" /> ?
+          </span>
+        </p>
+
+        <div class="search-location-button-group">
+          <button id="search-location-button"
+                  class="fa fa-search search-location-button search-button"></button>
+          <button id="geo-button" class="geo-button fa fa-location-arrow search-button"></button>
+        </div>
+      </header>
+
+      <div id="front-page-description" class="front-page-description middle">
+        <h1>Blank Canvas Weather</h1>
+        <h2>An Obligatory Weather App</h2>
+      </div>
+
+      <div id="weather" class="weather middle hide">
+        <div class="location" id="location"></div>
+        <div class="weather-container">
+          <div id="temperature-info" class="temperature-info">
+            <div class="temperature" id="temperature"></div>
+            <div class="weather-description" id="weather-description"></div>
+          </div>
+          <div class="weather-box">
+            <ul class="weather-info" id="weather-info">
+              <li class="weather-item humidity">Humidity: <span id="humidity"></span>%</li>
+              <li class="weather-item wind">
+                Wind: <span id="wind-direction"></span>
+                <span id="wind"></span>
+                <span id="speed-unit"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      Enjoy the weather at Codemotion 2015!!!
+    </footer>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="weather.js"></script>
+  </body>
+</html>
