@@ -18,4 +18,4 @@ Con lo que al ejecutar los siguientes comandos, deberiais ver sin problema las v
 
 También necesitaremos el código jQuery que vamos a convertir y que está disponible en este mismo repositorio.
 
-**NOTA**: Toda la descripción del taller y guía para seguirlo paso a paso está disponible en [el siguiente artículo](http://programmeratwork.com/blog/2015/11/26/taller-de-react-es6-y-webpack-en-el-codemotion-2015).
+**NOTA**: Toda la descripción del taller y guía para seguirlo paso a paso está disponible en [el siguiente artículo](https://github.com/borillo/codemotion-2015/blob/master/taller.pdf).
