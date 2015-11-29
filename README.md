@@ -222,7 +222,7 @@ class WeatherApp extends React.Component {
             <div>
               <header className="search-bar">
                 <p className="search-text">
-                  <span className="search-location-text">What's the weather like in
+                  <span className="search-location-text">What is the weather like in
                     <input id="search-location-input" className="search-location-input" type="text" placeholder="City" /> ?
                   </span>
                 </p>
@@ -277,7 +277,7 @@ class SearchBar extends React.Component {
         return (
             <header className="search-bar">
               <p className="search-text">
-                <span className="search-location-text">What's the weather like in
+                <span className="search-location-text">What is the weather like in
                 <input id="search-location-input" 
                        className="search-location-input" 
                        type="text" placeholder="City"/> ?</span>
@@ -379,7 +379,7 @@ class SearchBar extends React.Component {
         return (
             <header className="search-bar">
               <p className="search-text">
-                <span className="search-location-text">What's the weather like in
+                <span className="search-location-text">What is the weather like in
                   <input id="search-location-input"
                          ref="search-location-input"
                          className="search-location-input" type="text"
@@ -579,7 +579,7 @@ class SearchBar extends React.Component {
         return (
              <header className="search-bar">
                <p className="search-text">
-                 <span className="search-location-text">What's the weather like in
+                 <span className="search-location-text">What is the weather like in
                    <input id="search-location-input"
                           ref="search-location-input"
                           className="search-location-input" type="text"
