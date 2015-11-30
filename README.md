@@ -6,7 +6,7 @@ Este documento tiene como objetivo servir de guía [al taller que se realizará 
 
 Como requisito antes de comenzar, es necesario tener instalado [NodeJS](https://nodejs.org/en/). Para ello, recomendamos el uso de [NVM](https://github.com/creationix/nvm) (Node Version Manager), con el cual podemos instalar y utilizar varias versiones de [NodeJS](https://nodejs.org/en/) en nuestro entorno. 
 
-**NOTA:** Tenéis más información de cómo funciona y algunos ejemplos de uso [en este artículo](http://programmeratwork.com/blog/2015/07/24/gestion-eficiente-de-tus-instalaciones-de-nodejs/).
+**NOTA:** Tenéis más información de cómo funciona y algunos ejemplos de uso [en este artículo](http://programmeratwork.com/blog/2015/07/24/gestion-eficiente-de-tus-instalaciones-de-nodejs/) y el vídeo de la presentación [aquí](https://www.youtube.com/watch?v=_oARNJqq1yE).
 
 En definitiva, si ya tenéis NVM instalado, sólo tenéis que ejecutar:
 
