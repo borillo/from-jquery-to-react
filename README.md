@@ -2,7 +2,7 @@
 
 Este documento tiene como objetivo servir de guía [al taller que se realizará en el Codemotion 20015](http://2015.codemotion.es/agenda.html#5677904553836544/48534003) el próximo 27 de Noviembre de 2015 y que tendrá una duración de 90 minutos.
 
-**NOTA:** Podéis encontrar las slides de la charla [aquí](https://speakerdeck.com/borillo/iniciacion-a-react-y-es6-con-webpack).
+**NOTA:** Podéis encontrar las slides de la charla [aquí](https://speakerdeck.com/borillo/iniciacion-a-react-y-es6-con-webpack) y el vídeo que introduce los principales conceptos [aquí](https://www.youtube.com/watch?v=_oARNJqq1yE).
 
 ## Puesta en marcha del entorno
 
