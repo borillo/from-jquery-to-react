@@ -1,32 +1,30 @@
 # Taller de React, ES6 y webpack
 
-Este documento tiene como objetivo servir de guía [al taller que se realizará en el Codemotion 20015](http://2015.codemotion.es/agenda.html#5677904553836544/48534003) el próximo 27 de Noviembre de 2015 y que tendrá una duración de 90 minutos.
-
 **NOTA:** Podéis encontrar las slides de la charla [aquí](https://speakerdeck.com/borillo/iniciacion-a-react-y-es6-con-webpack) y el vídeo que introduce los principales conceptos [aquí](https://www.youtube.com/watch?v=_oARNJqq1yE).
+
+**NOTA:** El ejemplo ha sido modificado para sólo reponder a búsquedas por "Castellón" o "Valencia", ya que el API de weather de OpenStreetMap es ahora cerrada :/
 
 ## Puesta en marcha del entorno
 
 Como requisito antes de comenzar, es necesario tener instalado [NodeJS](https://nodejs.org/en/). Para ello, recomendamos el uso de [NVM](https://github.com/creationix/nvm) (Node Version Manager), con el cual podemos instalar y utilizar varias versiones de [NodeJS](https://nodejs.org/en/) en nuestro entorno. 
 
-**NOTA:** Tenéis más información de cómo funciona y algunos ejemplos de uso [en este artículo](http://programmeratwork.com/blog/2015/07/24/gestion-eficiente-de-tus-instalaciones-de-nodejs/) y el vídeo de la presentación [aquí](https://www.youtube.com/watch?v=_oARNJqq1yE).
-
 En definitiva, si ya tenéis NVM instalado, sólo tenéis que ejecutar:
 
-    $ nvm install v5.0.0
+    $ nvm install v8.4.0
    
 Con lo que al ejecutar los siguientes comandos, deberíais ver sin problemas las versiones correctas de [NodeJS](https://nodejs.org/en/) y [NPM](https://www.npmjs.com/):
 
     $ node -v
-    v5.0.0
+    v8.4.0
     
     $ npm -v
-    3.3.6
+    5.5.2
 
 ## Creación del proyecto "weather"
 
 Nuestro objetivo en este taller va a ser migrar a React una aplicación desarrollada en jQuery que permite consultar el tiempo indicando una localidad o obteniendola de nuestra geolocalización. 
 
-El código original que vamos a migrar lo podéis descargar [aquí](https://github.com/borillo/codemotion-2015/tree/master/jquery). Como la idea es partir de la aplicación jQuery e ir haciendo cambios poco a poco, descargad ya el ejemplo para tenerlo preparado.
+El código original que vamos a migrar lo podéis descargar del directorio `jquery` de este mismo repositorio. Como la idea es partir de la aplicación jQuery e ir haciendo cambios poco a poco, descargad ya el ejemplo para tenerlo preparado.
 
 Listos para comenzar!! Vamos pues a crear un directorio para el proyecto y le daremos el nombre de weather-react:
 
@@ -47,9 +45,8 @@ Antes de migrar a React el proyecto, vamos primero a poner a punto nuestro workf
 
 Si todo ha ido bien, deberíais poder ejecutar:
 
-    $ webpack -h
-    webpack 1.12.4
-    Usage: https://webpack.github.io/docs/cli.html
+    $ webpack -v
+    3.5.6
 
 ### Empaquetado de ficheros JavaScript
 
@@ -88,6 +85,12 @@ Si no hemos metido la pata, todo debería seguir funcionando de la misma forma :
 Recuerda que si quieres generar la versión de producción del bundle, sólo debes ejecutar webpack con el siguiente flag:
 
     webpack -p
+    Hash: 645a62865caf048b5458
+    Version: webpack 3.5.6
+    Time: 111ms
+        Asset     Size  Chunks             Chunk Names
+    bundle.js  3.83 kB       0  [emitted]  main
+       [0] ./weather.js 6.28 kB {0} [built]
 
 ### Empaquetado de ficheros CSS
 
@@ -108,7 +111,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: 'style!css'
+                loader: 'style-loader!css-loader'
             }
         ]
     }
@@ -147,7 +150,7 @@ Instalemos pues las dependencias de React en primer lugar:
     
 Y posteriormente, los loaders que webpack necesitará para procesar el código React:
 
-    npm install --save-dev babel-loader babel-preset-es2015 babel-preset-react
+    npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
     
 En este caso, también es necesaria una pequeña modificación del `webpack.config.js` para que estos nuevos loaders sean cargados:
 
@@ -162,12 +165,12 @@ module.exports = {
         loaders: [
            {
                test: /\.css$/,
-               loader: 'style!css'
+               loader: 'style-loader!css-loader'
            },
            {
                test: /\.jsx?$/,
                exclude: /node_modules/,
-               loader: 'babel',
+               loader: 'babel-loader',
                query: {
                    presets:['es2015','react']
                }
@@ -175,7 +178,7 @@ module.exports = {
        ]
     },
     resolve: {
-        extensions: ["", ".js", ".jsx", ".css"]
+        extensions: [".js", ".jsx", ".css"]
     }
 }
 ```
@@ -359,9 +362,7 @@ Eventos que se producen en la aplicación:
 
 Vamos a comenzar por el primero y vamos a hacernos cargo de la gestión del evento de `keypress`. Pare ello deberemos borrar el código jQuery que se ocupa de actuar sobre este evento y modifcar la clase `SearchBar` para tratar este evento, recuperar los datos del tiempo y enviar el resultado a `WeatherApp`:
 
-```javascript
-const API_TOKEN = "0596fe0573fa9daa94c2912e5e383ed3";
-    
+```javascript   
 class SearchBar extends React.Component {
     selectLocation(event) {
         if (event.keyCode !== 13) return;
@@ -369,12 +370,8 @@ class SearchBar extends React.Component {
     }
     
     showWeather() {
-        let location = this.refs["search-location-input"].value;
-        let url= `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_TOKEN}`;
-    
-        $.getJSON(url, (data) => {
-            this.props.onData(data);
-        });
+        let location = this.refs["search-location-input"].value;        
+        this.props.onData(retrieveWeather(location));
     }
     
     render() {
@@ -561,20 +558,12 @@ class SearchBar extends React.Component {
     }
     
     showWeather() {
-        let location = this.refs["search-location-input"].value;
-        let url= `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_TOKEN}`;
-    
-        $.getJSON(url, (data) => {
-            this.props.onData(data);
-        });
+        let location = this.refs["search-location-input"].value;        
+        this.props.onData(retrieveWeather(location));
     }
-    
+        
     showWeatherByLatitude(longitude, latitude) {
-        let url= `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_TOKEN}`;
-    
-        $.getJSON(url, (data) => {
-            this.props.onData(data);
-        });
+        this.props.onData(retrieveWeather("Castellón"));
     }
     
     render() {
