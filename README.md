@@ -597,7 +597,7 @@ class SearchBar extends React.Component {
 
 Con todo el marcado migrado, los componentes React extraidos y los eventos definidos, ya sólo nos queda borrar todo el código jQuery de `weather.js` y comprobar que la aplicación sigue siendo funcional.
 
-**NOTA:** Si has llegado hasta aquí y algo no te funciona, revisa tu código comparándolo con el que he publicado en [el repo de la charla en Github](https://github.com/borillo/codemotion-2015).
+**NOTA:** Si has llegado hasta aquí y algo no te funciona, revisa tu código comparándolo con el que he publicado en el directorio `react` de este mismo repo.
 
 A partir de aquí, si queremos prescindir totalmente de jQuery, podemos usar `fetch` para realizar las peticiones AJAX al servicio del tiempo que se usa en la aplicación. Como [fetch aún no está implementado en todos los navegadores](http://caniuse.com/#search=fetch), podemos usar una librería externa que actua como polyfill. En nuestro caso vamos a utilizar `isomorphic-fetch` porque podemos usarla tanto en cliente como en servidor con NodeJS y soporta promesas ES6.
 
